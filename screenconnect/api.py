@@ -33,7 +33,7 @@ class ScreenConnect():
         self.url = url
         self.user, self.pwd = auth
 
-    def _set_authentication_cookie(self):
+    def _set_authentication(self):
         ''' Captures and stored the authentication cookie for specified
         user '''
 
@@ -49,3 +49,7 @@ class ScreenConnect():
 
         self.user, self.pwd = auth
         self._auth_cookie = None
+
+    def _make_request(self, url, verb, data = None):
+        ''' Requests a url to perform an action '''
+        pass
