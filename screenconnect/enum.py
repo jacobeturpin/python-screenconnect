@@ -3,6 +3,8 @@ from enum import Enum
 class SessionEvent(Enum):
     pass
 
+class SessionType(Enum):
+    pass
 
-class SessionConnectionEvent(Enum):
+class ProcessType(Enum):
     pass
