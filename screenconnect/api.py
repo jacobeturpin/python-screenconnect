@@ -8,10 +8,15 @@ import time
 try:
     # Python 3
     from urllib.parse import urlparse, urlunparse, urlencode
-    from urllib.request import urlopen
+    from urllib.request import urlopen, Request
     from urllib.request import __version__ as urllib_version
+    from base64 import b64encode
 except ImportError:
     # Python 2.7+
+
+    # Will focus on backporting to Python 2 once basic functionality
+    # with Python 3 has been implemented
+
     from urlparse import urlparse, urlunparse
     from urllib2 import urlopen
     from urllib import urlencode
@@ -37,8 +42,11 @@ class ScreenConnect():
         ''' Captures and stores the authentication cookie for specified
         user '''
 
-        # Need to add authentication to the request
-        r = urllib.request.urlopen(self.url)
+        request = Request(self.url)
+        request.add_header('Authorization', 'Basic ''{}:{}'.format(self.user, self.pwd))
+        
+        # Need to fix - always returns HTTP 500 Error
+        r = urlopen(request)
         self._auth_cookie = r.getheader('Set-Cookie')
 
     def _reset_auth_account(self, auth):
