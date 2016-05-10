@@ -5,13 +5,13 @@ from __future__ import print_function
 import sys
 import time
 
-
 try:
     # Python 3
     from urllib.parse import urlparse, urlunparse, urlencode
     from urllib.request import urlopen
     from urllib.request import __version__ as urllib_version
 except ImportError:
+    # Python 2.7+
     from urlparse import urlparse, urlunparse
     from urllib2 import urlopen
     from urllib import urlencode
@@ -34,7 +34,7 @@ class ScreenConnect():
         self.user, self.pwd = auth
 
     def _set_authentication(self):
-        ''' Captures and stored the authentication cookie for specified
+        ''' Captures and stores the authentication cookie for specified
         user '''
 
         # Need to add authentication to the request
@@ -44,6 +44,8 @@ class ScreenConnect():
     def _reset_auth_account(self, auth):
         ''' Resets the designated account for authorization '''
 
+        user, pwd = auth
+
         if self.user == user and self.pwd == pwd:
             return None
 
@@ -52,4 +54,13 @@ class ScreenConnect():
 
     def _make_request(self, url, verb, data = None):
         ''' Requests a url to perform an action '''
+        pass
+
+    def create_session(self):
+        pass
+
+    def end_session(self):
+        pass
+
+    def create_session_group(self):
         pass

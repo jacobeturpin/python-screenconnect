@@ -8,3 +8,10 @@ class SessionGroup():
         self.api = api
         self.name = name
         self.session_type = session_type
+
+    def modify(self, **kwargs):
+        ''' Alter the details or settings of the session group '''
+        pass
+
+    def end(self):
+        pass

@@ -4,11 +4,16 @@
 class Session():
     ''' Object for interacting with ScreenConnect Sessions '''
 
-    def __init__(self, **kwargs):
+    def __init__(self, id, name, **kwargs):
         ''' Instantiates a new session object '''
-        pass
 
-    def modify_session_details(self, **kwargs):
+        #Used to handle positional arguments
+        f = lambda x: kwargs.get(x, None)
+
+        self.id = id
+        self.name = name
+
+    def modify(self, **kwargs):
         ''' Alter the details or settings of the session '''
         pass
 
