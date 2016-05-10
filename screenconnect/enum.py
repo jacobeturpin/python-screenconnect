@@ -51,7 +51,13 @@ class SessionEvent(Enum):
 
 
 class SessionType(Enum):
-    pass
+    
+    Support = 0
+    Meeting = 1
+    Access = 2
 
 class ProcessType(Enum):
-    pass
+    
+    Unknown = 0
+    Host = 1
+    Guest = 2
