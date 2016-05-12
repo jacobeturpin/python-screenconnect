@@ -55,3 +55,27 @@ class ScreenConnect():
 
     def create_session_group(self):
         pass
+
+
+
+    '''
+
+        Likely the initial phase for v0.1
+
+        SendEmail
+
+
+        GetHostSessionInfo
+        GetGuestSessionInfo
+        GetSessionDetails
+        CreateSession
+        UpdateSessions
+        GetEligibleHosts
+        TransferSessions
+
+
+
+        GetSessionGroups
+        SaveSessionGroups
+
+    '''
