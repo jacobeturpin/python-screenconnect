@@ -4,12 +4,14 @@ from enumerations import SessionType
 class Session():
     ''' Object for interacting with ScreenConnect Sessions '''
 
-    def __init__(self, id, name, **kwargs):
+    def __init__(self, api, id, name, **kwargs):
         ''' Instantiates a new session object '''
 
         # Used to handle positional arguments
         f = lambda x: kwargs.get(x, None)
 
+        self.api = api
+        
         self.id = id
         self.name = name
 
@@ -40,7 +42,7 @@ class Session():
         '''
 
 
-    def modify(self, **kwargs):
+    def modify_details(self, **kwargs):
         ''' Alter the details or settings of the session '''
         pass
 
