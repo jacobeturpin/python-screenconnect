@@ -53,8 +53,7 @@ class ScreenConnect():
 
         path = '/Services/PageService.ashx/CreateSession'
         payload = [session_type, name, is_public, code, custom_properties]
-        result = self._make_request('POST', path, 
-                                    data = dumps(payload))
+        result = self._make_request('POST', path, data = dumps(payload))
         return Session(self, result, name)
         
 

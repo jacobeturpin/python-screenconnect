@@ -48,6 +48,16 @@ class Session():
         pass
 
     def _add_event_to_sessions(self, event):
+        """ Adds a SessionEvent record to one or more Sessions
+
+        ScreenConnect API
+
+        - sessionGroupName
+        - sessionIDs
+        - sessionEventType
+        - data
+        """
+
         path = '/Services/PageService.ashx/AddEventToSessions'
         self.api._make_request('POST', path, data = event) 
 
