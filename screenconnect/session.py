@@ -46,8 +46,11 @@ class Session():
         ''' Alter the details or settings of the session '''
         pass
 
-    def end(self):
+    def _add_event_to_sessions(self):
         pass
+
+    def end(self):
+        self._add_event_to_sessions()
 
 
 class SessionGuestInfo():
