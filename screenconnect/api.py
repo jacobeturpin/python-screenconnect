@@ -50,11 +50,8 @@ class ScreenConnect():
         payload = [session_type, name, is_public, code, custom_properties]
         result = requests.post(path, data = dumps(payload),
                                auth=(self.user, self.__pwd)).json()
-
-        # Need to create session object and return that instead
-
-        session = Session(self, result, name)
-        return result
+        return Session(self, result, name)
+        
 
     def get_guest_session_info(self):
         pass

@@ -11,20 +11,19 @@ class Session():
         f = lambda x: kwargs.get(x, None)
 
         self.api = api
-        
         self.id = id
         self.name = name
 
+        '''
         # Need to convert integer into SessionType Enum
-        self.session_type = SessionType.Access #placeholder
-
+        self.session_type = None
         self.host = f('host')
         self.is_public = f('is_public')
         self.code = f('code')
         self.legacy_encryption_key = f('legacy_encryption_key')
         self.custom_properties = f('custom_property_values')
 
-        '''
+        
             GuestInfo
             GuestInfoUpdateTime
             QueuedEventType
@@ -41,6 +40,8 @@ class Session():
             LastAlteredVersion
         '''
 
+    def get_details(self):
+        pass
 
     def modify_details(self, **kwargs):
         ''' Alter the details or settings of the session '''
