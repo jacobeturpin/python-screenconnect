@@ -12,44 +12,49 @@ from session import Session
 
 
 class ScreenConnect():
-    ''' A python interface into the ScreenConnect API '''
+    """ A python interface into the ScreenConnect API """
 
     def __init__(self,
                  url,
                  auth = None):
-        ''' Instantiate a new ScreenConnect object 
+        """ Instantiate a new ScreenConnect object 
         
-        url = publicly accessible url for your ScreenConnect web server 
-        auth = (user, pwd)
-        '''
+        Arguments:
+        url -- publicly accessible url for the ScreenConnect web server 
+        auth -- (user, pwd)
+        """
 
+        # Need to do some basic sanitation to remove unnecessary 
+        # trailing slash
         self.url = url
         self.user, self.__pwd = auth
 
     def _reset_auth_account(self, auth):
-        ''' Resets the designated account for authorization '''
+        """ Resets the designated account for authorization """
 
         user, pwd = auth
-
         if self.user == user and self.pwd == pwd:
             return None
-
         self.user, self.__pwd = auth
 
-    def _make_request(self, url, verb, data = None):
-        ''' Requests a url to perform an action '''
-        pass
+    def _make_request(self, verb, path, data = None):
+        """ Performs request with optional payload to a specified path """
+        
+        url = self.url + path
+        response = requests.request(verb, url, auth = (self.user, self.__pwd),
+                                    data = data)
+        return response.json()
 
     # ------------ SESSION METHODS ------------
 
     def create_session(self, session_type, name, is_public, code,
                        custom_properties):
-        ''' Creates a new ScreenConnect session '''
+        """ Creates a new ScreenConnect session """
 
-        path = self.url + '/Services/PageService.ashx/CreateSession'
+        path = '/Services/PageService.ashx/CreateSession'
         payload = [session_type, name, is_public, code, custom_properties]
-        result = requests.post(path, data = dumps(payload),
-                               auth=(self.user, self.__pwd)).json()
+        result = self._make_request('POST', path, 
+                                    data = dumps(payload))
         return Session(self, result, name)
         
 
@@ -72,7 +77,6 @@ class ScreenConnect():
 
     def create_session_group(self):
         pass
-
 
     def get_session_groups(self):
         pass

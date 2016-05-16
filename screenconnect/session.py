@@ -47,8 +47,9 @@ class Session():
         ''' Alter the details or settings of the session '''
         pass
 
-    def _add_event_to_sessions(self):
-        pass
+    def _add_event_to_sessions(self, event):
+        path = '/Services/PageService.ashx/AddEventToSessions'
+        self.api._make_request('POST', path, data = event) 
 
     def end(self):
         self._add_event_to_sessions()
