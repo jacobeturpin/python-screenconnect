@@ -78,7 +78,11 @@ class ScreenConnect():
         pass
 
     def get_session_groups(self):
-        pass
+        """ Retrieves all session groups """
+
+        path = '/Services/SessionGroupService.ashx/GetSessionGroups'
+        result = self._make_request('GET', path)
+        return result
 
     def save_session_groups(self):
         pass
