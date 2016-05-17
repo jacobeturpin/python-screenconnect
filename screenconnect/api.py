@@ -63,6 +63,10 @@ class ScreenConnect():
     def get_host_session_info(self):
         pass
 
+    # Need to consider if this is better implemented under Session
+    def get_session_details():
+        pass
+
     def update_sessions(self):
         pass
 
@@ -92,21 +96,8 @@ class ScreenConnect():
     def send_email(self):
         pass
 
-    '''
+    def transfer_sessions(self):
+        pass
 
-        Likely the initial phase for v0.1
-
-        SendEmail
-
-        GetHostSessionInfo
-        GetGuestSessionInfo
-        GetSessionDetails
-        CreateSession
-        UpdateSessions
-        GetEligibleHosts
-        TransferSessions
-
-        GetSessionGroups
-        SaveSessionGroups
-
-    '''
+    def get_eligible_hosts(self):
+        pass
