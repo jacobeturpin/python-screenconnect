@@ -1,4 +1,4 @@
-''' A library that provides a Python interface to the ScreenConnect API '''
+""" A library that provides a Python interface to the ScreenConnect API """
 
 from __future__ import print_function
 
