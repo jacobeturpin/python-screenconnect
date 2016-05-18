@@ -1,8 +1,9 @@
 """  """
 
-from screenconnect import ScreenConnect, SessionType
+from screenconnect.enumerations import SessionType
 
 class SessionGroup():
+    """ Object for interacting with ScreenConnect Session Groups """
 
     def __init__(self, api, **kwargs):
         """ Instantiates a session group object 

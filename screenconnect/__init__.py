@@ -9,8 +9,7 @@ __title__ = 'screenconnect'
 __author__ = 'Jacob Turpin'
 
 
-from .session import Session, SessionGuestInfo
+from .session import Session
 from .session_group import SessionGroup
-from .enumerations import ProcessType, SessionEvent, SessionType
-from .error import ScreenConnectError
+from .enumerations import SessionType
 from .api import ScreenConnect

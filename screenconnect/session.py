@@ -1,6 +1,6 @@
 #from enumerations import SessionType
 
-from screenconnect import ScreenConnect, SessionType
+from screenconnect.enumerations import SessionType
 
 class Session():
     """ Object for interacting with ScreenConnect Sessions """

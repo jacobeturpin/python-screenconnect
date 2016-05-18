@@ -8,7 +8,9 @@ import requests
 from datetime import datetime
 from json import dumps
 
-from screenconnect import Session, SessionGroup
+
+from screenconnect.session import Session
+from screenconnect.session_group import SessionGroup
 
 
 class ScreenConnect():
@@ -86,7 +88,7 @@ class ScreenConnect():
 
         path = '/Services/SessionGroupService.ashx/GetSessionGroups'
         result = self._make_request('GET', path)
-        return result
+        return [SessionGroup(self,**x) for x in result]
 
     def save_session_groups(self):
         pass
