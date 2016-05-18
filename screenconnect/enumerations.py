@@ -1,4 +1,8 @@
+
+# Need to implement logic for importing enum64 on versions 
+# prior to 3.4
 from enum import Enum
+
 
 class SessionEvent(Enum):
 

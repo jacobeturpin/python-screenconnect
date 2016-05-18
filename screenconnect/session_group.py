@@ -1,11 +1,11 @@
-#from enumerations import SessionType
+"""  """
 
 from screenconnect import ScreenConnect, SessionType
 
 class SessionGroup():
 
     def __init__(self, api, **kwargs):
-        ''' Instantiates a session group object 
+        """ Instantiates a session group object 
         
         Arguments:
         api -- object used to enact any changes/modifications
@@ -14,7 +14,7 @@ class SessionGroup():
         is_system -- describes whether the Session Group is user-modifiable
         session_filter -- definition by which the group is populated
         subgroup_expressions -- criteria for any further session organization
-        '''
+        """
 
         f = lambda x: kwargs.get(x)
 
@@ -27,7 +27,7 @@ class SessionGroup():
         self.subgroup_expressions = f('SubgroupExpressions')
 
     def modify(self, **kwargs):
-        ''' Alter the details or settings of the session group '''
+        """ Alter the details or settings of the session group """
         pass
 
     def end(self):
