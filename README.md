@@ -6,7 +6,9 @@ An unofficial Python implementation of teh ScreenConnect API
 ## Requirements
 
 * Python 2.7+
-* [Requests](https://pypi.python.org/pypi/requests/)
+* [requests](https://pypi.python.org/pypi/requests/)
+* [enum34](https://pypi.python.org/pypi/enum34) for versions needing Enum backported from 3.4
+* [future](https://pypi.python.org/pypi/future) for Python 2
 
 ## Get the Code
 
@@ -21,4 +23,4 @@ $ cd python-screenconnect
 
 ## Running Tests
 
-*No tests have been developed at this time*
+*Coming soon*
