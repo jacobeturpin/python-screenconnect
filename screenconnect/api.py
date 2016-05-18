@@ -8,7 +8,7 @@ import requests
 from datetime import datetime
 from json import dumps
 
-from session import Session
+from screenconnect import Session, SessionGroup
 
 
 class ScreenConnect():

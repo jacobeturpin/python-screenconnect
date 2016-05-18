@@ -1,4 +1,6 @@
-from enumerations import SessionType
+#from enumerations import SessionType
+
+from screenconnect import ScreenConnect, SessionType
 
 class SessionGroup():
 
