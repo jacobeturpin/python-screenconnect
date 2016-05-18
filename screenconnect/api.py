@@ -96,8 +96,5 @@ class ScreenConnect():
     def send_email(self):
         pass
 
-    def transfer_sessions(self):
-        pass
-
     def get_eligible_hosts(self):
         pass
