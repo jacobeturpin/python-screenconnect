@@ -43,7 +43,12 @@ class Session():
             LastAlteredVersion
         '''
 
+        self.get_details()
+
+
     def get_details(self):
+
+        path = '/Services/PageService.ashx/GetSessionDetails'
         pass
 
     def modify_details(self, **kwargs):
@@ -63,8 +68,12 @@ class Session():
 
         path = '/Services/PageService.ashx/AddEventToSessions'
 
-        # Attempting to pass empty session group - make need to fix
-        payload = dumps(['', [self.id], event.value, ''])
+        # Attempting to pass empty session group
+        # This throws server FaultException b/c SessionGroup doesn't
+        # exist
+
+        # Just throwing a hard-coded value in here for testing purposes
+        payload = dumps(['All Sessions', [self.id], event.value, ''])
         self.api._make_request('POST', path, data = payload) 
 
     def end(self):
@@ -74,4 +83,21 @@ class Session():
 class SessionGuestInfo():
 
     def __init__(self, **kwargs):
+
+        '''
+            - guest network address
+            - guest machine name
+            - guest machine domain
+            - guest processor name
+            - guest processor virtual count
+            - guest system memory total megabytes
+            - guest system memory available megabytes
+            - guest screenshot content type
+            - guest info update time
+            - guest screenshot content
+            - base time
+
+        '''
+
+
         return super().__init__(**kwargs)
