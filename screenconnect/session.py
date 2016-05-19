@@ -1,6 +1,8 @@
 #from enumerations import SessionType
 
-from screenconnect.enumerations import SessionType
+from screenconnect.enumerations import SessionType, SessionEvent
+
+from json import dumps
 
 class Session():
     """ Object for interacting with ScreenConnect Sessions """
@@ -60,10 +62,13 @@ class Session():
         """
 
         path = '/Services/PageService.ashx/AddEventToSessions'
-        self.api._make_request('POST', path, data = event) 
+
+        # Attempting to pass empty session group - make need to fix
+        payload = dumps(['', [self.id], event.value, ''])
+        self.api._make_request('POST', path, data = payload) 
 
     def end(self):
-        self._add_event_to_sessions()
+        self._add_event_to_sessions(SessionEvent.EndedSession)
 
 
 class SessionGuestInfo():
