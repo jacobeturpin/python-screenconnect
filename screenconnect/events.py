@@ -1,24 +1,23 @@
+""" Objects for the Session Events that can occur in ScreenConnect"""
 
 
-
-class SessionEvent():
+class SessionEvent:
     """ Object to describe events attributed to a ScreenConnect
         Session
     """
 
     def __init__(self, **kwargs):
 
-        '''
+        """
             - id
             - event type
             - time
             - host
             - data
 
-        '''
+        """
 
-
-        return super().__init__(**kwargs)
+        super().__init__(**kwargs)
 
 
 class SessionConnectionEvent(SessionEvent):
@@ -27,9 +26,8 @@ class SessionConnectionEvent(SessionEvent):
     """
 
     def __init__(self, **kwargs):
-
-        '''
+        """
             - connection
-        '''
+        """
 
-        return super().__init__(**kwargs)
+        super().__init__(**kwargs)

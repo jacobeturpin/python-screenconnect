@@ -1,10 +1,11 @@
-#from enumerations import SessionType
+""" Session objects """
 
-from screenconnect.enumerations import SessionType, SessionEvent
+from screenconnect.enumerations import SessionEvent
 
 from json import dumps
 
-class Session():
+
+class Session:
     """ Object for interacting with ScreenConnect Sessions """
 
     def __init__(self, api, id, name, **kwargs):
@@ -17,7 +18,6 @@ class Session():
         self.id = id
         self.name = name
 
-        '''
         # Need to convert integer into SessionType Enum
         self.session_type = None
         self.host = f('host')
@@ -26,7 +26,7 @@ class Session():
         self.legacy_encryption_key = f('legacy_encryption_key')
         self.custom_properties = f('custom_property_values')
 
-        
+        '''
             GuestInfo
             GuestInfoUpdateTime
             QueuedEventType
@@ -45,14 +45,15 @@ class Session():
 
         self.get_details()
 
-
     def get_details(self):
+        """ Gets specific details about session """
 
         path = '/Services/PageService.ashx/GetSessionDetails'
         pass
 
     def modify_details(self, **kwargs):
         """ Alter the details or settings of the session """
+
         pass
 
     def _add_event_to_sessions(self, event):
@@ -74,17 +75,17 @@ class Session():
 
         # Just throwing a hard-coded value in here for testing purposes
         payload = dumps(['All Sessions', [self.id], event.value, ''])
-        self.api._make_request('POST', path, data = payload) 
+        self.api._make_request('POST', path, data=payload)
 
     def end(self):
         self._add_event_to_sessions(SessionEvent.EndedSession)
 
 
-class SessionGuestInfo():
+class SessionGuestInfo:
 
     def __init__(self, **kwargs):
 
-        '''
+        """
             - guest network address
             - guest machine name
             - guest machine domain
@@ -97,7 +98,6 @@ class SessionGuestInfo():
             - guest screenshot content
             - base time
 
-        '''
+        """
 
-
-        return super().__init__(**kwargs)
+        super().__init__(**kwargs)

@@ -2,23 +2,17 @@
 
 from __future__ import print_function
 
-import sys
-import time
 import requests
-from datetime import datetime
 from json import dumps
-
 
 from screenconnect.session import Session
 from screenconnect.session_group import SessionGroup
 
 
-class ScreenConnect():
+class ScreenConnect:
     """ A python interface into the ScreenConnect API """
 
-    def __init__(self,
-                 url,
-                 auth = None):
+    def __init__(self, url, auth=None):
         """ Instantiate a new ScreenConnect object 
         
         Arguments:
@@ -39,12 +33,12 @@ class ScreenConnect():
             return None
         self.user, self.__pwd = auth
 
-    def _make_request(self, verb, path, data = None):
+    def _make_request(self, verb, path, data=None):
         """ Performs request with optional payload to a specified path """
         
         url = self.url + path
-        response = requests.request(verb, url, auth = (self.user, self.__pwd),
-                                    data = data)
+        response = requests.request(verb, url, auth=(self.user, self.__pwd),
+                                    data=data)
         return response.json()
 
     # ------------ SESSION METHODS ------------
@@ -55,18 +49,13 @@ class ScreenConnect():
 
         path = '/Services/PageService.ashx/CreateSession'
         payload = [session_type, name, is_public, code, custom_properties]
-        result = self._make_request('POST', path, data = dumps(payload))
+        result = self._make_request('POST', path, data=dumps(payload))
         return Session(self, result, name)
-        
 
     def get_guest_session_info(self):
         pass
     
     def get_host_session_info(self):
-        pass
-
-    # Need to consider if this is better implemented under Session
-    def get_session_details():
         pass
 
     def update_sessions(self):

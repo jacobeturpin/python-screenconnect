@@ -3,8 +3,10 @@
 # prior to 3.4
 from enum import Enum
 
+
 # Update to SessionEventType
 class SessionEvent(Enum):
+    """ Enums for Session Events """
 
     Connected = 10
     Disconnected = 11

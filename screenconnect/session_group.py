@@ -2,7 +2,7 @@
 
 from screenconnect.enumerations import SessionType
 
-class SessionGroup():
+class SessionGroup:
     """ Object for interacting with ScreenConnect Session Groups """
 
     def __init__(self, api, **kwargs):
