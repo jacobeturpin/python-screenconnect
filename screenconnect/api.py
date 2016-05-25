@@ -16,8 +16,8 @@ class ScreenConnect:
         """ Instantiate a new ScreenConnect object 
         
         Arguments:
-        url -- publicly accessible url for the ScreenConnect web server 
-        auth -- (user, pwd)
+            url -- publicly accessible url for the ScreenConnect web server
+            auth -- (user, pwd)
         """
 
         # Need to do some basic sanitation to remove unnecessary 
@@ -25,16 +25,27 @@ class ScreenConnect:
         self.url = url
         self.user, self.__pwd = auth
 
-    def _reset_auth_account(self, auth):
-        """ Resets the designated account for authorization """
+    def reset_auth_credentials(self, auth=(None, None)):
+        """ Resets the designated account for authorization
+
+        Argument:
+            auth -- supplied credentials in (user, pwd); if no credentials
+            are provided, they will default to none to revoke access
+        """
 
         user, pwd = auth
-        if self.user == user and self.pwd == pwd:
+        if self.user == user and self.__pwd == pwd:
             return None
         self.user, self.__pwd = auth
 
     def make_request(self, verb, path, data=None):
-        """ Performs request with optional payload to a specified path """
+        """ Performs request with optional payload to a specified path
+
+        Arguments:
+            verb -- HTTP verb to use when making the request
+            path -- relative path to append to the object's url
+            data -- optional payload to send with the request
+        """
         
         url = self.url + path
         response = requests.request(verb, url, auth=(self.user, self.__pwd),
@@ -45,7 +56,19 @@ class ScreenConnect:
 
     def create_session(self, session_type, name, is_public, code,
                        custom_properties):
-        """ Creates a new ScreenConnect session """
+        """ Creates a new ScreenConnect session
+
+        ScreenConnect API -- ~/Services/PageService.ashx/CreateSession
+
+        Arguments:
+            session_type -- type of ScreenConnect session
+            name -- identifying name visible to users
+            is_public -- boolean value on whether the session can be connected
+            to form the Guest page
+            code -- code that can be used to join from the Guest Page if applicable
+            custom_properties -- list of 8 properties that can be used to define
+            groups and filters for sessions
+        """
 
         path = '/Services/PageService.ashx/CreateSession'
         payload = [session_type, name, is_public, code, custom_properties]
@@ -53,31 +76,61 @@ class ScreenConnect:
         return Session(self, result, name)
 
     def get_guest_session_info(self):
+        """ Retrieves information about a session from the Guest perspective
+
+        ScreenConnect API -- ~/Services/PageService.ashx/GetGuestSessionInfo
+
+        Arguments:
+        """
+
         pass
     
     def get_host_session_info(self):
+        """ Retrieves information about a session from the Host perspective
+
+        ScreenConnect API -- ~/Services/PageService.ashx/GetHostSessionInfo
+
+        Arguments:
+        """
+
         pass
 
-    def update_sessions(self):
+    def update_sessions(self, session_group_name, session_ids, names, is_publics,
+                        codes, custom_property_values):
+        """ Updates one or more ScreenConnect sessions within the same session group;
+            all lists should be saved in the same respective order
+
+        ScreenConnect API -- ~/Services/PageService.ashx/UpdateSessions
+
+        Arguments:
+            session_group_name -- name of the session group to which sessions belong
+            session_ids -- list of session ids for the sessions to update
+            names --  list of names
+            is_publics -- list of boolean is_public statuses
+            codes -- list of join code strings
+            custom_property_values -- list of custom property value lists
+        """
         pass
 
-    def transfer_sessions(self):
-        pass
+    def transfer_sessions(self, session_group_name, session_ids, to_host):
+        """ Updates the "ownership" quality of one or more ScreenConnect sessions
+            within the same session group
 
-    def end_session(self):
+        ScreenConnect API -- ~/Services/PageService.ashx/TransferSessions
+
+        Arguments:
+            session_group_name --
+        """
         pass
 
     # ------------ SESSION GROUP METHODS ------------
-
-    def create_session_group(self):
-        pass
 
     def get_session_groups(self):
         """ Retrieves all session groups """
 
         path = '/Services/SessionGroupService.ashx/GetSessionGroups'
         result = self.make_request('GET', path)
-        return [SessionGroup(self,**x) for x in result]
+        return [SessionGroup(self, **x) for x in result]
 
     def save_session_groups(self):
         pass
@@ -88,4 +141,10 @@ class ScreenConnect:
         pass
 
     def get_eligible_hosts(self):
+        pass
+
+    def get_toolbox(self):
+        pass
+
+    def execute_session_process(self):
         pass

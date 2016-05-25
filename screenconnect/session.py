@@ -8,23 +8,20 @@ from json import dumps
 class Session:
     """ Object for interacting with ScreenConnect Sessions """
 
-    def __init__(self, api, id, name, **kwargs):
+    def __init__(self, api, session_id, name, **kwargs):
         """ Instantiates a new session object """
 
-        # Used to handle positional arguments
-        f = lambda x: kwargs.get(x, None)
-
         self.api = api
-        self.id = id
+        self.session_id = session_id
         self.name = name
 
         # Need to convert integer into SessionType Enum
         self.session_type = None
-        self.host = f('host')
-        self.is_public = f('is_public')
-        self.code = f('code')
-        self.legacy_encryption_key = f('legacy_encryption_key')
-        self.custom_properties = f('custom_property_values')
+        self.host = kwargs.get('host')
+        self.is_public = kwargs.get('is_public')
+        self.code = kwargs.get('code')
+        self.legacy_encryption_key = kwargs.get('legacy_encryption_key')
+        self.custom_properties = kwargs.get('custom_property_values')
 
         '''
             GuestInfo
@@ -74,7 +71,7 @@ class Session:
         # exist
 
         # Just throwing a hard-coded value in here for testing purposes
-        payload = dumps(['All Sessions', [self.id], event.value, ''])
+        payload = dumps(['All Sessions', [self.session_id], event.value, ''])
         self.api.make_request('POST', path, data=payload)
 
     def end(self):
