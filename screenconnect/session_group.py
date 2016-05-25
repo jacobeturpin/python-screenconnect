@@ -2,6 +2,7 @@
 
 from screenconnect.enumerations import SessionType
 
+
 class SessionGroup:
     """ Object for interacting with ScreenConnect Session Groups """
 
@@ -17,15 +18,13 @@ class SessionGroup:
         subgroup_expressions -- criteria for any further session organization
         """
 
-        f = lambda x: kwargs.get(x)
-
         self.api = api
 
-        self.name = f('Name')
-        self.session_type = SessionType(f('SessionType'))
-        self.is_system = f('IsSystem')
-        self.session_filter = f('SessionFilter')
-        self.subgroup_expressions = f('SubgroupExpressions')
+        self.name = kwargs.get('Name')
+        self.session_type = SessionType(kwargs.get('SessionType'))
+        self.is_system = kwargs.get('IsSystem')
+        self.session_filter = kwargs.get('SessionFilter')
+        self.subgroup_expressions = kwargs.get('SubgroupExpressions')
 
     def modify(self, **kwargs):
         """ Alter the details or settings of the session group """

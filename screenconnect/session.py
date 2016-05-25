@@ -75,7 +75,7 @@ class Session:
 
         # Just throwing a hard-coded value in here for testing purposes
         payload = dumps(['All Sessions', [self.id], event.value, ''])
-        self.api._make_request('POST', path, data=payload)
+        self.api.make_request('POST', path, data=payload)
 
     def end(self):
         self._add_event_to_sessions(SessionEvent.EndedSession)

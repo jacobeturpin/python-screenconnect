@@ -33,7 +33,7 @@ class ScreenConnect:
             return None
         self.user, self.__pwd = auth
 
-    def _make_request(self, verb, path, data=None):
+    def make_request(self, verb, path, data=None):
         """ Performs request with optional payload to a specified path """
         
         url = self.url + path
@@ -49,7 +49,7 @@ class ScreenConnect:
 
         path = '/Services/PageService.ashx/CreateSession'
         payload = [session_type, name, is_public, code, custom_properties]
-        result = self._make_request('POST', path, data=dumps(payload))
+        result = self.make_request('POST', path, data=dumps(payload))
         return Session(self, result, name)
 
     def get_guest_session_info(self):
@@ -76,7 +76,7 @@ class ScreenConnect:
         """ Retrieves all session groups """
 
         path = '/Services/SessionGroupService.ashx/GetSessionGroups'
-        result = self._make_request('GET', path)
+        result = self.make_request('GET', path)
         return [SessionGroup(self,**x) for x in result]
 
     def save_session_groups(self):
