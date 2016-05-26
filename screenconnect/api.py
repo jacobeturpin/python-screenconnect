@@ -83,6 +83,7 @@ class ScreenConnect:
         Arguments:
         """
 
+        path = '/Services/PageService.ashx/GetGuestSessionInfo'
         pass
     
     def get_host_session_info(self):
@@ -93,6 +94,7 @@ class ScreenConnect:
         Arguments:
         """
 
+        path = '/Services/PageService.ashx/GetHostSessionInfo'
         pass
 
     def update_sessions(self, session_group_name, session_ids, names, is_publics,
@@ -110,6 +112,7 @@ class ScreenConnect:
             codes -- list of join code strings
             custom_property_values -- list of custom property value lists
         """
+
         pass
 
     def transfer_sessions(self, session_group_name, session_ids, to_host):
@@ -121,6 +124,8 @@ class ScreenConnect:
         Arguments:
             session_group_name --
         """
+
+        path = '/Services/PageService.ashx/TransferSessions'
         pass
 
     # ------------ SESSION GROUP METHODS ------------
@@ -133,18 +138,36 @@ class ScreenConnect:
         return [SessionGroup(self, **x) for x in result]
 
     def save_session_groups(self):
+        """ Saves all session groups """
+
+        path = '/Services/SessionGroupService.ashx/SaveSessionGroups'
+        pass
+
+    # ------------ MISC METHODS ------------
+
+    def get_session_report(self, report_type, select_fields, group_fields,
+                           report_filter, aggregate_filter, item_limit):
+        """ Get a report based upon session criteria """
+
+        path = '/Report.json'
         pass
 
     # ------------ MISC METHODS ------------
 
     def send_email(self):
+        """ Sends an email through the ScreenConnect mail service"""
+
+        path = '/Services/MailService.ashx/SendEmail'
         pass
 
     def get_eligible_hosts(self):
+        """ Retrieves list of all accounts with login in past 24 hours """
+
+        path = '/Services/PageService.ashx/GetEligibleHosts'
         pass
 
     def get_toolbox(self):
-        pass
+        """ Retrieves toolbox items """
 
-    def execute_session_process(self):
+        path = '/Services/PageService.ashx/GetToolbox'
         pass
