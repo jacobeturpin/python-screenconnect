@@ -25,6 +25,13 @@ class ScreenConnect:
         self.url = url
         self.user, self.__pwd = auth
 
+    def __repr__(self):
+        return '{0}({1})'.format(self.__class__.__name__, self.url)
+
+    @property
+    def server_version(self):
+        return requests.get(self.url).headers.get('Server')
+
     def reset_auth_credentials(self, auth=(None, None)):
         """ Resets the designated account for authorization
 
