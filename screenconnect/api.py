@@ -7,6 +7,7 @@ from json import dumps
 
 from screenconnect.session import Session
 from screenconnect.session_group import SessionGroup
+from screenconnect.error import ScreenConnectError
 
 
 class ScreenConnect:
@@ -26,11 +27,11 @@ class ScreenConnect:
         self.user, self.__pwd = auth
 
     def __repr__(self):
-        return '{0}({1})'.format(self.__class__.__name__, self.url)
+        return '{0}(url: {1}, user: {2})'.format(self.__class__.__name__, self.url, self.user)
 
     @property
     def server_version(self):
-        return requests.get(self.url).headers.get('Server')
+        return self.make_request('GET', return_json=False).headers.get('Server')
 
     def reset_auth_credentials(self, auth=(None, None)):
         """ Resets the designated account for authorization
@@ -45,8 +46,10 @@ class ScreenConnect:
             return None
         self.user, self.__pwd = auth
 
-    def make_request(self, verb, path, data=None):
+    def make_request(self, verb, path='', data=None, return_json=True):
         """ Performs request with optional payload to a specified path
+
+        The purpose of
 
         Arguments:
             verb -- HTTP verb to use when making the request
@@ -55,9 +58,17 @@ class ScreenConnect:
         """
         
         url = self.url + path
-        response = requests.request(verb, url, auth=(self.user, self.__pwd),
-                                    data=data)
-        return response.json()
+        response = requests.request(verb, url, auth=(self.user, self.__pwd), data=data)
+        status_code = response.status_code
+
+        if status_code == 200:
+            return response.json() if return_json else response
+        elif status_code == 403:
+            raise ScreenConnectError('Bad or missing credentials provided')
+        elif status_code == 404:
+            raise ScreenConnectError('Invalid URL provided')
+        else:
+            raise ScreenConnectError('Unknown error')
 
     # ------------ SESSION METHODS ------------
 
