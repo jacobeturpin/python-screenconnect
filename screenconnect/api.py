@@ -108,6 +108,7 @@ class ScreenConnect:
         """
 
         path = '/Services/PageService.ashx/GetGuestSessionInfo'
+        self.make_request('GET', path)
         pass
     
     def get_host_session_info(self):
@@ -119,6 +120,7 @@ class ScreenConnect:
         """
 
         path = '/Services/PageService.ashx/GetHostSessionInfo'
+        self.make_request('GET', path)
         pass
 
     def update_sessions(self, session_group_name, session_ids, names, is_publics,
@@ -136,7 +138,8 @@ class ScreenConnect:
             codes -- list of join code strings
             custom_property_values -- list of custom property value lists
         """
-
+        path = '/Services/PageService.ashx/UpdateSessions'
+        self.make_request('POST', path)
         pass
 
     def transfer_sessions(self, session_group_name, session_ids, to_host):
@@ -150,6 +153,7 @@ class ScreenConnect:
         """
 
         path = '/Services/PageService.ashx/TransferSessions'
+        self.make_request('POST', path)
         pass
 
     # ------------ SESSION GROUP METHODS ------------
@@ -165,6 +169,7 @@ class ScreenConnect:
         """ Saves all session groups """
 
         path = '/Services/SessionGroupService.ashx/SaveSessionGroups'
+        self.make_request('POST', path)
         pass
 
     # ------------ MISC METHODS ------------
@@ -184,7 +189,7 @@ class ScreenConnect:
             'ItemLimit': item_limit
         }
 
-        response = self.make_request('GET', path, params=params)
+        response = self.make_request('GET', path, params={k: v for k, v in params.items() if v})
 
         if transform:
             response = [dict(zip(response['FieldNames'], x))
@@ -198,16 +203,19 @@ class ScreenConnect:
         """ Sends an email through the ScreenConnect mail service"""
 
         path = '/Services/MailService.ashx/SendEmail'
+        self.make_request('POST', path)
         pass
 
     def get_eligible_hosts(self):
         """ Retrieves list of all accounts with login in past 24 hours """
 
         path = '/Services/PageService.ashx/GetEligibleHosts'
+        self.make_request('GET', path)
         pass
 
     def get_toolbox(self):
         """ Retrieves toolbox items """
 
         path = '/Services/PageService.ashx/GetToolbox'
+        self.make_request('GET', path)
         pass
