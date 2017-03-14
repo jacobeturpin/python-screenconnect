@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 
+import re
 import requests
 from json import dumps
 
@@ -21,8 +22,7 @@ class ScreenConnect:
             auth -- (user, pwd)
         """
 
-        # Need to do some basic sanitation to remove unnecessary 
-        # trailing slash
+        # Need to do some basic sanitation to remove unnecessary trailing slash
         self.url = url
         self.user, self.__pwd = auth
 
@@ -31,7 +31,12 @@ class ScreenConnect:
 
     @property
     def server_version(self):
-        return self.make_request('GET', return_json=False).headers.get('Server')
+        raw_server = self.make_request('HEAD', return_json=False).headers.get('Server')
+
+        try:
+            return re.search('ScreenConnect/([0-9][0-9.]*[0-9])*', raw_server).group(1)
+        except AttributeError:
+            raise ScreenConnectError('Unable to determine server version')
 
     def reset_auth_credentials(self, auth=(None, None)):
         """ Resets the designated account for authorization
@@ -46,7 +51,7 @@ class ScreenConnect:
             return None
         self.user, self.__pwd = auth
 
-    def make_request(self, verb, path='', data=None, return_json=True):
+    def make_request(self, verb, path='', data=None, params=None, return_json=True):
         """ Performs request with optional payload to a specified path
 
         The purpose of
@@ -58,7 +63,8 @@ class ScreenConnect:
         """
         
         url = self.url + path
-        response = requests.request(verb, url, auth=(self.user, self.__pwd), data=data)
+        response = requests.request(verb, url, auth=(self.user, self.__pwd),
+                                    data=data, params=params)
         status_code = response.status_code
 
         if status_code == 200:
@@ -164,11 +170,27 @@ class ScreenConnect:
     # ------------ MISC METHODS ------------
 
     def get_session_report(self, report_type, select_fields, group_fields,
-                           report_filter, aggregate_filter, item_limit):
+                           report_filter, aggregate_filter, item_limit, transform=True):
         """ Get a report based upon session criteria """
 
         path = '/Report.json'
-        pass
+
+        params = {
+            'ReportType': report_type,
+            'SelectFields': select_fields,
+            'GroupFields': group_fields,
+            'Filter': report_filter,
+            'AggregateFilter': aggregate_filter,
+            'ItemLimit': item_limit
+        }
+
+        response = self.make_request('GET', path, params=params)
+
+        if transform:
+            response = [dict(zip(response['FieldNames'], x))
+                        for x in response['Items']]
+
+        return response
 
     # ------------ MISC METHODS ------------
 

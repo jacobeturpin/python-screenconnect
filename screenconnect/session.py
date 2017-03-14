@@ -11,7 +11,7 @@ class Session:
     def __init__(self, api, session_id, name, **kwargs):
         """ Instantiates a new session object """
 
-        self.api = api
+        self._api = api
         self.session_id = session_id
         self.name = name
 
@@ -72,7 +72,7 @@ class Session:
 
         # Just throwing a hard-coded value in here for testing purposes
         payload = dumps(['All Sessions', [self.session_id], event.value, ''])
-        self.api.make_request('POST', path, data=payload)
+        self._api.make_request('POST', path, data=payload)
 
     def end(self):
         self._add_event_to_sessions(SessionEvent.EndedSession)

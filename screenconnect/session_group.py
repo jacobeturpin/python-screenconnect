@@ -18,7 +18,7 @@ class SessionGroup:
         subgroup_expressions -- criteria for any further session organization
         """
 
-        self.api = api
+        self._api = api
 
         self.name = kwargs.get('Name')
         self.session_type = SessionType(kwargs.get('SessionType'))
