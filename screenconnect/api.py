@@ -174,8 +174,9 @@ class ScreenConnect:
 
     # ------------ MISC METHODS ------------
 
-    def get_session_report(self, report_type, select_fields, group_fields,
-                           report_filter, aggregate_filter, item_limit, transform=True):
+    def get_session_report(self, report_type=None, select_fields=None, group_fields=None,
+                           report_filter=None, aggregate_filter=None, item_limit=None,
+                           transform=True):
         """ Get a report based upon session criteria """
 
         path = '/Report.json'
