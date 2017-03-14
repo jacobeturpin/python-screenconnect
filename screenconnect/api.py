@@ -200,23 +200,21 @@ class ScreenConnect:
 
     # ------------ MISC METHODS ------------
 
-    def send_email(self):
+    def send_email(self, to, subject=None, body=None, is_html=False):
         """ Sends an email through the ScreenConnect mail service"""
 
         path = '/Services/MailService.ashx/SendEmail'
-        self.make_request('POST', path)
-        pass
+        data = [to, subject, body, is_html]
+        self.make_request('POST', path, data=data)
 
     def get_eligible_hosts(self):
         """ Retrieves list of all accounts with login in past 24 hours """
 
         path = '/Services/PageService.ashx/GetEligibleHosts'
-        self.make_request('GET', path)
-        pass
+        return self.make_request('GET', path)
 
     def get_toolbox(self):
         """ Retrieves toolbox items """
 
         path = '/Services/PageService.ashx/GetToolbox'
-        self.make_request('GET', path)
-        pass
+        return self.make_request('GET', path)
