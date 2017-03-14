@@ -204,8 +204,8 @@ class ScreenConnect:
         """ Sends an email through the ScreenConnect mail service"""
 
         path = '/Services/MailService.ashx/SendEmail'
-        data = [to, subject, body, is_html]
-        self.make_request('POST', path, data=data)
+        payload = dumps([to, subject, body, is_html])
+        self.make_request('POST', path, data=payload)
 
     def get_eligible_hosts(self):
         """ Retrieves list of all accounts with login in past 24 hours """
