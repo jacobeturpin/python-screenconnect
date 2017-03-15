@@ -26,6 +26,10 @@ class SessionGroup:
         self.session_filter = kwargs.get('SessionFilter')
         self.subgroup_expressions = kwargs.get('SubgroupExpressions')
 
+    def __repr__(self):
+        return '{0}(name: {1}, type: {2}, filter: {3})' \
+                   .format(self.__class__.__name__, self.name, self.session_type, self.session_filter)
+
     def modify(self, **kwargs):
         """ Alter the details or settings of the session group """
         pass
