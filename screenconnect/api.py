@@ -111,7 +111,8 @@ class ScreenConnect:
         self.make_request('GET', path)
         pass
     
-    def get_host_session_info(self):
+    def get_host_session_info(self, session_type=0, session_group_path=[], session_filter=None,
+                              find_session_id=None, version=0):
         """ Retrieves information about a session from the Host perspective
 
         ScreenConnect API -- ~/Services/PageService.ashx/GetHostSessionInfo
@@ -120,8 +121,9 @@ class ScreenConnect:
         """
 
         path = '/Services/PageService.ashx/GetHostSessionInfo'
-        self.make_request('GET', path)
-        pass
+        payload = [session_type, session_group_path, session_filter, find_session_id, version]
+        self.make_request('GET', path, data=dumps(payload))
+        pass  # TODO: return session objects for each
 
     def update_sessions(self, session_group_name, session_ids, names, is_publics,
                         codes, custom_property_values):
