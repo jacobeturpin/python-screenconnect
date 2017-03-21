@@ -58,6 +58,7 @@ class SessionEvent(Enum):
 
 class SessionType(Enum):
     
+    Unknown = -1
     Support = 0
     Meeting = 1
     Access = 2

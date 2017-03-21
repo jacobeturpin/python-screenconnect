@@ -1,6 +1,6 @@
 """ Session objects """
 
-from screenconnect.enumerations import SessionEvent
+from screenconnect.enumerations import SessionEvent, SessionType
 
 from json import dumps
 
@@ -16,7 +16,7 @@ class Session:
         self.name = name
 
         # Need to convert integer into SessionType Enum
-        self.session_type = None
+        self.session_type = SessionType(kwargs.get('SessionType', -1))
         self.host = kwargs.get('host')
         self.is_public = kwargs.get('is_public')
         self.code = kwargs.get('code')
@@ -41,6 +41,10 @@ class Session:
         '''
 
         self.get_details()
+
+    def __repr__(self):
+        return '{0}(id: {1}, name: {2}, type: {3})' \
+                   .format(self.__class__.__name__, self.session_id, self.name, self.session_type.name)
 
     def get_details(self):
         """ Gets specific details about session """
