@@ -94,6 +94,8 @@ class ScreenConnect:
             groups and filters for sessions
         """
 
+        # TODO: propagate missing values to Session object
+
         path = '/Services/PageService.ashx/CreateSession'
         payload = [session_type.value, name, is_public, code, custom_properties]
         result = self.make_request('POST', path, data=dumps(payload))
@@ -156,8 +158,8 @@ class ScreenConnect:
         """
 
         path = '/Services/PageService.ashx/TransferSessions'
-        self.make_request('POST', path)
-        pass
+        payload = [session_group_name, session_ids, to_host]
+        self.make_request('POST', path, data=dumps(payload))
 
     # ------------ SESSION GROUP METHODS ------------
 
