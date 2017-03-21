@@ -62,6 +62,7 @@ class SessionType(Enum):
     Meeting = 1
     Access = 2
 
+
 class ProcessType(Enum):
     
     Unknown = 0
