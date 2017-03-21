@@ -22,7 +22,6 @@ class SessionGroup:
 
         self.name = kwargs.get('Name')
         self.session_type = SessionType(kwargs.get('SessionType'))
-        self.is_system = kwargs.get('IsSystem')
         self.session_filter = kwargs.get('SessionFilter')
         self.subgroup_expressions = kwargs.get('SubgroupExpressions')
 
@@ -35,7 +34,6 @@ class SessionGroup:
         return {
             'Name': self.name,
             'SessionType': self.session_type.value,
-            'IsSystem': self.is_system,
             'SessionFilter': self.session_filter,
             'SubgroupExpressions': self.subgroup_expressions
         }
