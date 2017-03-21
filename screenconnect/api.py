@@ -170,12 +170,12 @@ class ScreenConnect:
         result = self.make_request('GET', path)
         return [SessionGroup(self, **x) for x in result]
 
-    def save_session_groups(self):
+    def save_session_groups(self, session_groups):
         """ Saves all session groups """
 
         path = '/Services/SessionGroupService.ashx/SaveSessionGroups'
-        self.make_request('POST', path)
-        pass
+        payload = list([_.to_dict() for _ in session_groups])  # needs to be nested for some reason
+        self.make_request('POST', path, data=dumps(payload))
 
     # ------------ MISC METHODS ------------
 

@@ -30,9 +30,16 @@ class SessionGroup:
         return '{0}(name: {1}, type: {2}, filter: {3})' \
                    .format(self.__class__.__name__, self.name, self.session_type, self.session_filter)
 
+    def to_dict(self):
+        """ Returns object as dict """
+        return {
+            'Name': self.name,
+            'SessionType': self.session_type.value,
+            'IsSystem': self.is_system,
+            'SessionFilter': self.session_filter,
+            'SubgroupExpressions': self.subgroup_expressions
+        }
+
     def modify(self, **kwargs):
         """ Alter the details or settings of the session group """
-        pass
-
-    def end(self):
         pass
