@@ -1,3 +1,4 @@
+"""Errors specific to this library"""
 
 
 class ScreenConnectError(Exception):

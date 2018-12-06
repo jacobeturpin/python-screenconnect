@@ -1,8 +1,8 @@
 """ Session objects """
 
-from screenconnect.enumerations import SessionEvent, SessionType
-
 from json import dumps
+
+from screenconnect.enumerations import SessionEvent, SessionType
 
 
 class Session:
