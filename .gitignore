@@ -62,7 +62,7 @@ target/
 .ipynb_checkpoints
 
 # Files for testing locally
-*debug.py
+*debug*.py
 
 #Pycharm Files
 .idea/*

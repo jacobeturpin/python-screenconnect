@@ -4,6 +4,7 @@ from __future__ import print_function
 
 import re
 from json import dumps
+from sys import version_info
 
 import requests
 
@@ -11,11 +12,13 @@ from screenconnect.session import Session
 from screenconnect.session_group import SessionGroup
 from screenconnect.error import ScreenConnectError
 
+IS_PY3 = version_info[0] > 2
+
 
 class ScreenConnect:
     """ A python interface into the ScreenConnect API """
 
-    def __init__(self, url, auth=None):
+    def __init__(self, base_url, auth=None):
         """ Instantiate a new ScreenConnect object 
         
         Arguments:
@@ -23,8 +26,9 @@ class ScreenConnect:
             auth -- (user, pwd)
         """
 
-        # Need to do some basic sanitation to remove unnecessary trailing slash
-        self.url = url
+        # TODO: need to do some basic sanitation to remove unnecessary trailing slash
+        self.sess = requests.Session()
+        self.url = base_url
         self.user, self.__pwd = auth
 
     def __repr__(self):
@@ -38,6 +42,12 @@ class ScreenConnect:
             return re.search('ScreenConnect/([0-9][0-9.]*[0-9])*', raw_server).group(1)
         except AttributeError:
             raise ScreenConnectError('Unable to determine server version')
+
+    def login(self):
+        """Creates authenticated session"""
+
+        login = '/Login'
+        pass    # TODO: implement multi-page flow
 
     def reset_auth_credentials(self, auth=(None, None)):
         """ Resets the designated account for authorization
@@ -64,8 +74,8 @@ class ScreenConnect:
         """
         
         url = self.url + path
-        response = requests.request(verb, url, auth=(self.user, self.__pwd),
-                                    data=data, params=params)
+        response = self.sess.request(verb, url, auth=(self.user, self.__pwd),
+                                     data=data, params=params)
         status_code = response.status_code
 
         if status_code == 200:
