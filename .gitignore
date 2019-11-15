@@ -66,3 +66,6 @@ target/
 
 #Pycharm Files
 .idea/*
+
+# Virtual Environment
+.venv

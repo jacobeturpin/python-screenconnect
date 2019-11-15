@@ -1,6 +1,3 @@
-
-# Need to implement logic for importing enum64 on versions 
-# prior to 3.4
 from enum import Enum
 
 
@@ -57,7 +54,7 @@ class SessionEvent(Enum):
 
 
 class SessionType(Enum):
-    
+
     Unknown = -1
     Support = 0
     Meeting = 1
@@ -65,7 +62,7 @@ class SessionType(Enum):
 
 
 class ProcessType(Enum):
-    
+
     Unknown = 0
     Host = 1
     Guest = 2
