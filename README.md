@@ -1,30 +1,24 @@
-# python-screenconnect
-An unofficial Python wrapper around the ScreenConnect API
+# python-screenconnect An unofficial Python wrapper around the ScreenConnect API
 
 *Currently undergoing initial development*
 
 ## Introduction
 
-This library provides a pure Python interface for the ScreenConnect API. It's undergoing initial
-development, but it is intended to work with Python 2.7 and Python 3.
+This library provides a pure Python interface for the ScreenConnect API. Note
+that it's undergoing initial development.
 
 ## Requirements
 
-* Python 2.7+
-* An installed and publicly-accessible [ScreenConnect](https://www.screenconnect.com/) server
-* [requests](https://pypi.python.org/pypi/requests/)
-* [enum34](https://pypi.python.org/pypi/enum34) for versions needing Enum backported from 3.4
-* [future](https://pypi.python.org/pypi/future) for Python 2
+* Python 3.5+ and dependencies listed on `requirements.txt`
+* An installed and publicly-accessible
+  [ScreenConnect](https://www.screenconnect.com/) server
 
 ## Installation
 
-The code is hosted at https://github.com/jacobeturpin/python-screenconnect.git
-
-Checkout the code using the following:
+You can install this package from source using:
 
 ```shell
-$ git clone git://github.com/jacobeturpin/python-screenconnect.git
-$ cd python-screenconnect
+pip install .
 ```
 
 ## Getting Started
