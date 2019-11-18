@@ -15,7 +15,13 @@ that it's undergoing initial development.
 
 ## Installation
 
-You can install this package from source using:
+You can install latest release from PyPI by running:
+
+```shell
+pip install screenconnect
+```
+
+Or if you prefer to install from source, clone this repository and run:
 
 ```shell
 pip install .
